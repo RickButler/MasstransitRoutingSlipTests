@@ -38,11 +38,6 @@ namespace Courier.Tests
             //configurator.AddActivity<ActivityTwo>(s => s.);
             configurator.AddRequestClient<Request>();
         }
-        
-        protected override void ConfigureReceiveEndpoint(IReceiveEndpointConfigurator configurator)
-        {
-            configurator.Consumer<ResponseCourier>();
-        }
 
         [Test]
         public async Task TestMethod1()
