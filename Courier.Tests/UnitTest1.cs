@@ -50,9 +50,12 @@ namespace Courier.Tests
             using var scope = Provider.CreateScope();
             var requestClient = scope.ServiceProvider.GetRequiredService<IRequestClient<Request>>();
             var (response, fault) = await requestClient.GetResponse<RequestResponse, RequestFaulted>(new { });
-            var consumed =ConsumerRequestTestHarness.Consumed.Any<Request>();
-            var responseConsumed = ConsumerResponseTestHarness.Consumed.Any();
-            var d =response.Result;
+          
+                if (response.IsCompletedSuccessfully)
+                {
+                    var result = await response;
+                }
+            var d =response.Result.Message;
         }
     }
 }
