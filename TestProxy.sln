@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Couriers", "Couriers\Couriers.csproj", "{56776D76-5E35-4A66-A747-3AE2E27E4FFE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Courier.Tests", "Courier.Tests\Courier.Tests.csproj", "{6288C47F-F25B-49E2-8AE9-C2C1B96E4374}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{56776D76-5E35-4A66-A747-3AE2E27E4FFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56776D76-5E35-4A66-A747-3AE2E27E4FFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56776D76-5E35-4A66-A747-3AE2E27E4FFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56776D76-5E35-4A66-A747-3AE2E27E4FFE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6288C47F-F25B-49E2-8AE9-C2C1B96E4374}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6288C47F-F25B-49E2-8AE9-C2C1B96E4374}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6288C47F-F25B-49E2-8AE9-C2C1B96E4374}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6288C47F-F25B-49E2-8AE9-C2C1B96E4374}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
