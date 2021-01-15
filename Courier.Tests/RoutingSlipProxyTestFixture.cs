@@ -19,10 +19,6 @@ namespace Courier.Tests
         public IConsumerTestHarness<TRequestProxy> ConsumerRequestTestHarness;
         public IConsumerTestHarness<TResponseProxy> ConsumerResponseTestHarness;
         public ServiceProvider Provider;
-        public ConsumerTestHarness<TRequestProxy> RequestProxyHarness;
-        public IConsumer<TRequest> RequestProxyInstance;
-        public IConsumer<RoutingSlipCompleted> ResponseProxyCompletedInstance;
-        public IConsumer<RoutingSlipFaulted> ResponseProxyFaultedInstance;
         public InMemoryTestHarness TestHarness;
 
         [OneTimeSetUp]
@@ -31,8 +27,8 @@ namespace Courier.Tests
             var collection = new ServiceCollection()
                 .AddMassTransitInMemoryTestHarness(cfg =>
                 {
-                    cfg.AddConsumer<TRequestProxy>();
-                    cfg.AddConsumer<TResponseProxy>();
+                    cfg.AddConsumer<TRequestProxy>().Endpoint(x => x.Name = "SampleProxy");
+                    cfg.AddConsumer<TResponseProxy>().Endpoint(x => x.Name = "SampleProxy");
                     cfg.AddConsumerTestHarness<TRequestProxy>();
                     cfg.AddConsumerTestHarness<TResponseProxy>();
                     ConfigureMassTransit(cfg);
@@ -41,6 +37,8 @@ namespace Courier.Tests
             ConfigureServices(collection);
             Provider = collection.BuildServiceProvider(true);
             TestHarness = Provider.GetRequiredService<InMemoryTestHarness>();
+            ConsumerResponseTestHarness  = Provider.GetRequiredService<IConsumerTestHarness<TResponseProxy>>();
+            ConsumerRequestTestHarness  = Provider.GetRequiredService<IConsumerTestHarness<TRequestProxy>>();
             TestHarness.OnConfigureInMemoryBus += ConfigureInMemoryBus;
             TestHarness.OnConfigureInMemoryReceiveEndpoint += ConfigureInMemoryReceiveEndpoint;
             TestHarness.OnConfigureReceiveEndpoint += ConfigureReceiveEndpoint;
@@ -49,9 +47,6 @@ namespace Courier.Tests
 
             ConsumerRequestTestHarness = Provider.GetRequiredService<IConsumerTestHarness<TRequestProxy>>();
             ConsumerResponseTestHarness = Provider.GetRequiredService<IConsumerTestHarness<TResponseProxy>>();
-            //RequestProxyInstance = Provider.GetRequiredService<IConsumer<TRequest>>();
-            //ResponseProxyCompletedInstance = Provider.GetRequiredService<IConsumer<RoutingSlipCompleted>>();
-            //ResponseProxyFaultedInstance = Provider.GetRequiredService<IConsumer<RoutingSlipFaulted>>();
         }
 
         [OneTimeTearDown]

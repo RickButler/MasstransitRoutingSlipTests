@@ -35,8 +35,6 @@ namespace Courier.Tests
         {
             configurator.AddActivity<ActivityOne, ActivityOneArguments, ActivityLog>();
             configurator.AddActivity<ActivityTwo, ActivityTwoArguments, ActivityLog>();
-            //TestHarness.Activity<ActivityOne, ActivityOneArguments, ActivityLog>();
-
             //configurator.AddActivity<ActivityTwo>(s => s.);
             configurator.AddRequestClient<Request>();
         }
@@ -52,6 +50,8 @@ namespace Courier.Tests
             using var scope = Provider.CreateScope();
             var requestClient = scope.ServiceProvider.GetRequiredService<IRequestClient<Request>>();
             var (response, fault) = await requestClient.GetResponse<RequestResponse, RequestFaulted>(new { });
+            var consumed =ConsumerRequestTestHarness.Consumed.Any<Request>();
+            var responseConsumed = ConsumerResponseTestHarness.Consumed.Any();
             var d =response.Result;
         }
     }
